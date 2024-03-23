@@ -1,4 +1,4 @@
-// 23.03.2024 gfg solution
+// 23.03.2024 gfg potd solution
 class Solution {
   public:
     vector<int> Series(int n) {
