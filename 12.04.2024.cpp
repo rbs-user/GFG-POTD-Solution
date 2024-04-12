@@ -1,1 +1,16 @@
 // 12.04.2024 gfg potd solution
+class Solution {
+public:
+    long long pairAndSum(int n, long long arr[]) {
+        long long out = 0;
+        for (int i = 0; i < 32; ++i) {
+            long long cnt = 0;
+            for (int j = 0; j < n; ++j)
+                if (arr[j] & (1 << i)) 
+                    cnt++;
+            long long pairs = (cnt * (cnt - 1) / 2);
+            out += pairs * (1 << i);
+        }
+        return out;
+    }
+};
