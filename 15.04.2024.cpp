@@ -1,26 +1,15 @@
 // 15.04.2024 gfg potd solution
-class Solution{
-    public:
-    
-    int f(int n, int total, vector<int> &cost, int ind, vector<vector<int>>&dp){
-        if(ind>=n) return 0;
-        if(dp[ind][total]!=-1) return dp[ind][total];
+class Solution {
+public:
+    vector<int> countElements(vector<int> &a, vector<int> &b, int n, vector<int> &query, int q) {
+        sort(b.begin(), b.end());
+        vector<int> ans;
+        ans.reserve(q); // Reserve memory for the result vector to avoid dynamic resizing
         
-        int take=0;
-        if(cost[ind] <= total){
-            take = 1+f(n, total - cost[ind] + floor(0.9*cost[ind]), cost, ind+1, dp);
+        for (int i = 0; i < q; ++i) {
+            int count = upper_bound(b.begin(), b.end(), a[query[i]]) - b.begin();
+            ans.push_back(count);
         }
-        int not_take=f(n,total, cost, ind+1, dp);
-        
-        return dp[ind][total]=max(take, not_take);
-        
-    }
-    
-    int max_courses(int n, int total, vector<int> &cost)
-    {
-        //Code Here
-        vector<vector<int>>dp(n+1, vector<int>(total+1,-1));
-        int ans = f(n, total, cost, 0, dp);
         return ans;
     }
 };
