@@ -11,7 +11,15 @@ class Solution{
             slow=slow->next;
         }
         
-        prev->next=slow->next;
+        // Check if prev is not NULL before accessing prev->next
+        if(prev != NULL) {
+            prev->next=slow->next;
+        } else {
+            // If prev is NULL, it means there is only one node in the list,
+            // so we simply return NULL to indicate an empty list.
+            return NULL;
+        }
         return head;
     }
 };
+
