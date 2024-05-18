@@ -1,24 +1,19 @@
 // 17.05.2024 gfg potd solution
-class Solution {
+class Solution 
+{
   public:
-    int findPair(int n, int x, vector<int> &arr) {
-        // code here
-        sort(arr.begin(), arr.end());
-        int i=0, j=1;
-        while(j<n){
-            int diff=abs(arr[j]-arr[i]);
-            
-            if(diff==x){
+    int findPair(int n, int x, vector<int> &arr) 
+    {
+        unordered_set<int> seen;
+
+        for (int i = 0; i < n; i++)
+        {
+            if (seen.find(arr[i] - x) != seen.end() || seen.find(arr[i] + x) != seen.end())
+            {
                 return 1;
             }
-            else if(diff<x){
-                j++;
-            }
-            else{
-                i++;
-            }
+            seen.insert(arr[i]);
         }
-        
         return -1;
     }
 };
