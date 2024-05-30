@@ -1,24 +1,28 @@
 // 30.05.2024 gfg potd solution
 class Solution {
   public:
-    int findWinner(int n, int x, int y) {
+    int mod=1e9+7;
+    int countWays(string s1, string s2) {
         // code here
-        vector<int>arr(n+1,0);
-        arr[1]=1;
-        for(int i=2;i<=n;i++){
-            int j=i-1;
-            if(j>=0 && arr[j]==0){
-                arr[i]=1;
-            }
-            j=i-x;
-            if(j>=0 && arr[j]==0){
-                arr[i]=1;
-            }
-            j=i-y;
-            if(j>=0 && arr[j]==0){
-                arr[i]=1;
+        int n=s1.size();
+        int m=s2.size();
+
+        vector<vector<int>> dp(n+1, vector<int> (m+1, 0));
+
+        for (int i=0; i<=n; i++) 
+            dp[i][0]=1;
+
+
+        for(int i=1; i<=n; i++){
+            for(int j=1; j<=m;j++){
+                if(s1[i-1]==s2[j-1]){
+                    dp[i][j]=(dp[i-1][j-1]%mod+dp[i-1][j]%mod)%mod;
+                }
+                else {
+                    dp[i][j]=dp[i-1][j]%mod;
+                }
             }
         }
-        return arr[n];
+        return dp[n][m]%mod;
     }
 };
